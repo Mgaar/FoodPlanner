@@ -6,6 +6,7 @@ import android.util.Log;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.foodplanner.database.MealLocalDataSourceImpl;
 import com.example.foodplanner.model.Area;
 import com.example.foodplanner.model.Category;
 import com.example.foodplanner.model.Filter;
@@ -36,6 +37,7 @@ public class MainActivity extends AppCompatActivity implements MealNetworkCallBa
         remoteDataSource.makeAreaListNetworkCallBack(this);
         remoteDataSource.makeCategoryListNetworkCallBack(this);
         remoteDataSource.makeFilterAreaListNetworkCallBack(this,"Canadian");
+
     }
 
 
@@ -47,6 +49,8 @@ public class MainActivity extends AppCompatActivity implements MealNetworkCallBa
     @Override
     public void onMealNetworkCallBackSuccessfulResult(List<Meal> response) {
         Log.i(TAG, "onMealNetworkCallBackSuccessfulResult: " + response.get(0).getStrMeal());
+        MealLocalDataSourceImpl mealLocalDataSource = MealLocalDataSourceImpl.getInstance(getApplicationContext());
+        mealLocalDataSource.insertMeal(response.get(0));
     }
 
     @Override
