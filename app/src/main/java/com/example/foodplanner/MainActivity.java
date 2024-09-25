@@ -12,6 +12,7 @@ import com.example.foodplanner.model.Category;
 import com.example.foodplanner.model.Filter;
 import com.example.foodplanner.model.Ingredient;
 import com.example.foodplanner.model.Meal;
+import com.example.foodplanner.model.Repository;
 import com.example.foodplanner.network.AreaNetworkCallBack;
 import com.example.foodplanner.network.CategoryNetworkCallBack;
 import com.example.foodplanner.network.FilterNetworkCallBack;
@@ -21,23 +22,26 @@ import com.example.foodplanner.network.RemoteDataSource;
 
 import java.util.List;
 
-import retrofit2.Call;
+
 
 
 public class MainActivity extends AppCompatActivity implements MealNetworkCallBack, IngredientNetworkCallBack, AreaNetworkCallBack, CategoryNetworkCallBack, FilterNetworkCallBack {
     private static final String TAG = "MainActivity";
+    Repository repository;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
-        RemoteDataSource remoteDataSource = RemoteDataSource.getInstance();
-        remoteDataSource.makeRandomMealNetworkCallBack(this);
-        remoteDataSource.makeIngredientListNetworkCallBack(this);
-        remoteDataSource.makeAreaListNetworkCallBack(this);
-        remoteDataSource.makeCategoryListNetworkCallBack(this);
-        remoteDataSource.makeFilterAreaListNetworkCallBack(this,"Canadian");
 
+
+         repository = Repository.getInstance(MealLocalDataSourceImpl.getInstance(getApplicationContext()),RemoteDataSource.getInstance());
+        repository.getIngredientList(this);
+        repository.getAreaList(this);
+        repository.getCategoryList(this);
+        repository.getMealListByArea(this,"Canadian");
+        repository.getMealByName(this,"Rappie Pie");
+        repository.getMealById(this,"52933");
     }
 
 
@@ -49,8 +53,7 @@ public class MainActivity extends AppCompatActivity implements MealNetworkCallBa
     @Override
     public void onMealNetworkCallBackSuccessfulResult(List<Meal> response) {
         Log.i(TAG, "onMealNetworkCallBackSuccessfulResult: " + response.get(0).getStrMeal());
-        MealLocalDataSourceImpl mealLocalDataSource = MealLocalDataSourceImpl.getInstance(getApplicationContext());
-        mealLocalDataSource.insertMeal(response.get(0));
+repository.deleteMeal(response.get(0));
     }
 
     @Override

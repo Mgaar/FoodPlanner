@@ -1,10 +1,13 @@
 package com.example.foodplanner.network;
 
+
+
 import com.example.foodplanner.model.AreaResponse;
 import com.example.foodplanner.model.CategoryResponse;
 import com.example.foodplanner.model.FilterResponse;
 import com.example.foodplanner.model.IngredientResponse;
 import com.example.foodplanner.model.MealResponse;
+
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -16,7 +19,6 @@ public class RemoteDataSource {
     private static final String BASE_URL =new String("https://www.themealdb.com/api/json/v1/1/");
     private ApiClientInterface apiClientInterface;
     private static RemoteDataSource remoteDataSource =null;
-
     private RemoteDataSource ()
     {
         Retrofit retrofit = new Retrofit.Builder()
@@ -51,6 +53,7 @@ public class RemoteDataSource {
     }
     public void makeMealByIdNetworkCallBack (MealNetworkCallBack mealNetworkCallBack , String str)
     {
+
         Call<MealResponse> call = apiClientInterface.getMealById(str);
         call.enqueue(new Callback<MealResponse>() {
             @Override
@@ -64,6 +67,22 @@ public class RemoteDataSource {
             }
         });
     }
+    public void makeMealByNameNetworkCallBack (MealNetworkCallBack mealNetworkCallBack , String str)
+    {
+        Call<MealResponse> call = apiClientInterface.getMealByName(str);
+        call.enqueue(new Callback<MealResponse>() {
+            @Override
+            public void onResponse(Call<MealResponse> call, Response<MealResponse> response) {
+                mealNetworkCallBack.onMealNetworkCallBackSuccessfulResult(response.body().meals);
+            }
+
+            @Override
+            public void onFailure(Call<MealResponse> call, Throwable throwable) {
+                mealNetworkCallBack.onFailResult("error fetching Random meal");
+            }
+        });
+    }
+
     public void makeCategoryListNetworkCallBack (CategoryNetworkCallBack categoryNetworkCallBack)
     {
         Call<CategoryResponse> call = apiClientInterface.getCategories();
