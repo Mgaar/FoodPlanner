@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">FoodPlanner</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="title_search">Search</string>
+    <string name="mealplan">Meal Plan</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="favourite">Favourite</string>
+    <string name="addtofav">Favourite</string>
 </resources>

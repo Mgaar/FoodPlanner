@@ -1,78 +1,46 @@
 package com.example.foodplanner;
 
+
 import android.os.Bundle;
-import android.util.Log;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.ui.AppBarConfiguration;
+import androidx.navigation.ui.NavigationUI;
 
-import com.example.foodplanner.database.MealLocalDataSourceImpl;
-import com.example.foodplanner.model.Area;
-import com.example.foodplanner.model.Category;
-import com.example.foodplanner.model.Filter;
-import com.example.foodplanner.model.Ingredient;
-import com.example.foodplanner.model.Meal;
-import com.example.foodplanner.model.Repository;
-import com.example.foodplanner.network.AreaNetworkCallBack;
-import com.example.foodplanner.network.CategoryNetworkCallBack;
-import com.example.foodplanner.network.FilterNetworkCallBack;
-import com.example.foodplanner.network.IngredientNetworkCallBack;
-import com.example.foodplanner.network.MealNetworkCallBack;
-import com.example.foodplanner.network.RemoteDataSource;
-
-import java.util.List;
+import com.example.foodplanner.databinding.ActivityMainBinding;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 
+public class MainActivity extends AppCompatActivity {
 
-
-public class MainActivity extends AppCompatActivity implements MealNetworkCallBack, IngredientNetworkCallBack, AreaNetworkCallBack, CategoryNetworkCallBack, FilterNetworkCallBack {
-    private static final String TAG = "MainActivity";
-    Repository repository;
+    private ActivityMainBinding binding;
+    private NavController navController;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_main);
 
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
-         repository = Repository.getInstance(MealLocalDataSourceImpl.getInstance(getApplicationContext()),RemoteDataSource.getInstance());
-        repository.getIngredientList(this);
-        repository.getAreaList(this);
-        repository.getCategoryList(this);
-        repository.getMealListByArea(this,"Canadian");
-        repository.getMealByName(this,"Rappie Pie");
-        repository.getMealById(this,"52933");
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        BottomNavigationView navView = findViewById(R.id.nav_view);
+        // Passing each menu ID as a set of Ids because each
+        // menu should be considered as top level destinations.
+        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
+                R.id.navigation_home, R.id.navigation_search, R.id.navigation_favourite)
+                .build();
+
+      navController   = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
+        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
+        NavigationUI.setupWithNavController(binding.navView, navController);
     }
 
-
-    @Override
-    public void onIngredientNetworkCallBackSuccessfulResult(List<Ingredient> response) {
-        Log.i(TAG, "onIngredientNetworkCallBackSuccessfulResult: "+response.get(0).getStrIngredient());
-    }
-
-    @Override
-    public void onMealNetworkCallBackSuccessfulResult(List<Meal> response) {
-        Log.i(TAG, "onMealNetworkCallBackSuccessfulResult: " + response.get(0).getStrMeal());
-repository.deleteMeal(response.get(0));
-    }
-
-    @Override
-    public void onAreaNetworkCallBackSuccessfulResult(List<Area> response) {
-        Log.i(TAG, "onAreaNetworkCallBackSuccessfulResult: " + response.get(0).getStrArea());
-    }
-
-    @Override
-    public void onCategoryNetworkCallBackSuccessfulResult(List<Category> response) {
-        Log.i(TAG, "onCategoryNetworkCallBackSuccessfulResult: " + response.get(0).getStrCategory() );
-    }
-
-    @Override
-    public void onFilterNetworkCallBackSuccessfulResult(List<Filter> response) {
-        Log.i(TAG, "onFilterNetworkCallBackSuccessfulResult: " + response.get(0).getStrMeal());
-    }
-
-    @Override
-    public void onFailResult(String errStr) {
-
-    }
 }
+
+
+
