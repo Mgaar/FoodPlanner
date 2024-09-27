@@ -53,6 +53,7 @@ dependencies {
     implementation ("com.squareup.retrofit2:converter-gson:2.11.0")
     implementation ("com.github.bumptech.glide:glide:4.16.0")
     annotationProcessor (libs.compiler)
+    implementation ("com.airbnb.android:lottie:6.1.0")
 
     implementation ("androidx.room:room-runtime:2.6.1")
     annotationProcessor ("androidx.room:room-compiler:2.6.1")

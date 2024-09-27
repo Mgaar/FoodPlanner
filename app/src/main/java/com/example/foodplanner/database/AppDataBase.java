@@ -9,7 +9,7 @@ import androidx.room.RoomDatabase;
 
 import com.example.foodplanner.model.Meal;
 
-@Database(entities = {Meal.class},version = 1)
+@Database(entities = {Meal.class},version = 2)
 public abstract class AppDataBase extends RoomDatabase {
     private static AppDataBase instance=null;
 

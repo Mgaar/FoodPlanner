@@ -7,5 +7,8 @@
     <string name="mealplan">Meal Plan</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="favourite">Favourite</string>
-    <string name="addtofav">Favourite</string>
+    <string name="addtofav">Add To Fav</string>
+    <string name="remove">Remove</string>
+    <string name="favouritemeals">My Favourite Meals</string>
+    <string name="addtoplan">Add To Plan</string>
 </resources>

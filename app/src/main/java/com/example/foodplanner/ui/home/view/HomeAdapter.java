@@ -38,11 +38,16 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
         ImageView homeMealImageView;
         Button homeFavbutton;
         TextView homeMealTextView;
+        TextView homeMealAreaTextView;
+        TextView homeMealCategoryTextView;
+
         public ViewHolder(@NonNull View v) {
             super(v);
-            homeMealImageView = v.findViewById(R.id.homeMealImageView);
+            homeMealImageView = v.findViewById(R.id.imageView);
             homeFavbutton = v.findViewById(R.id.homeFavbutton);
             homeMealTextView = v.findViewById(R.id.homeMealTextView);
+            homeMealAreaTextView = v.findViewById(R.id.homeMealAreaTextView);
+            homeMealCategoryTextView = v.findViewById(R.id.homeMealCategoryTextView);
         }
 
     }
@@ -57,16 +62,19 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.homeMealTextView.setText(values.get(position).getStrMeal());
         holder.homeFavbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 homeOnClick.onFavClick(values.get(position));
             }
         });
-        Glide.with(context).load(values.get(position).getStrMealThumb()).apply(new RequestOptions().override(150,150)
+        Glide.with(context).load(values.get(position).getStrMealThumb()).apply(new RequestOptions().override(210,210)
                 )
                 .into(holder.homeMealImageView);
+        holder.homeMealTextView.setText(values.get(position).getStrMeal());
+        holder.homeMealAreaTextView.setText(values.get(position).getStrArea());
+        holder.homeMealCategoryTextView.setText(values.get(position).getStrCategory());
+
     }
 
     @Override

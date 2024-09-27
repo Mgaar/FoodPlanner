@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:tools="http://schemas.android.com/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
         android:id="@+id/navigation_home"
@@ -18,7 +19,7 @@
         android:title="@string/mealplan" />
     <item
         android:id="@+id/navigation_favourite"
-        android:icon="@android:drawable/ic_menu_today"
+        android:icon="@drawable/ic_fav_name"
         android:title="@string/favourite" />
 
 </menu>
