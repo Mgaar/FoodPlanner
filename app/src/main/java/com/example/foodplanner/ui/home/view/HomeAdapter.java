@@ -68,6 +68,12 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
                 homeOnClick.onFavClick(values.get(position));
             }
         });
+        holder.homeMealImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                homeOnClick.onItimClick(values.get(position));
+            }
+        });
         Glide.with(context).load(values.get(position).getStrMealThumb()).apply(new RequestOptions().override(210,210)
                 )
                 .into(holder.homeMealImageView);

@@ -15,6 +15,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 
 public class MainActivity extends AppCompatActivity {
+    public static final String MEAL = "meal";
 
     private ActivityMainBinding binding;
     private NavController navController;

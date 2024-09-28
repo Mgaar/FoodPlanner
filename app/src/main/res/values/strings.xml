@@ -11,4 +11,7 @@
     <string name="remove">Remove</string>
     <string name="favouritemeals">My Favourite Meals</string>
     <string name="addtoplan">Add To Plan</string>
+    <string name="dot" />
+    <string name="ing">Ingredients</string>
+    <string name="instructions">Instructions</string>
 </resources>
