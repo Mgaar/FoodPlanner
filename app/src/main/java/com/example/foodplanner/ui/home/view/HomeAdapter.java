@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -40,7 +41,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
         TextView homeMealTextView;
         TextView homeMealAreaTextView;
         TextView homeMealCategoryTextView;
-
+        CardView cardView;
         public ViewHolder(@NonNull View v) {
             super(v);
             homeMealImageView = v.findViewById(R.id.imageView);
@@ -48,6 +49,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
             homeMealTextView = v.findViewById(R.id.homeMealTextView);
             homeMealAreaTextView = v.findViewById(R.id.homeMealAreaTextView);
             homeMealCategoryTextView = v.findViewById(R.id.homeMealCategoryTextView);
+            cardView = v.findViewById(R.id.cardView);
         }
 
     }
@@ -69,6 +71,19 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
             }
         });
         holder.homeMealImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                homeOnClick.onItimClick(values.get(position));
+            }
+        });
+        holder.homeMealTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                homeOnClick.onItimClick(values.get(position));
+
+            }
+        });
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 homeOnClick.onItimClick(values.get(position));

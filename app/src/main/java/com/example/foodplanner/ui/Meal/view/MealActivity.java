@@ -4,10 +4,13 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,29 +25,31 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.foodplanner.MainActivity;
 import com.example.foodplanner.R;
+import com.example.foodplanner.database.MealLocalDataSourceImpl;
 import com.example.foodplanner.model.Meal;
 import com.example.foodplanner.model.MealIngredients;
+import com.example.foodplanner.model.Repository;
+import com.example.foodplanner.network.RemoteDataSource;
+import com.example.foodplanner.ui.Meal.presenter.MealActPresenter;
 import com.example.foodplanner.ui.fav.Presenter.FavPresenter;
 import com.example.foodplanner.ui.fav.view.FavAdapter;
 
 import java.util.ArrayList;
 
-public class MealActivity extends AppCompatActivity {
+public class MealActivity extends AppCompatActivity implements MealActView{
     private static final String TAG = "MealActivity";
-    Meal meal;
-    ImageView mealActImageView;
-    TextView mealActMealTxtView;
-    TextView mealActMealCategoryTxtView;
-    TextView mealActMealAreaTextView;
-    TextView mealActMealInstructionsTxtView;
-    private String[] ingredients;
-    private String[] measures;
+    private Meal meal;
+    private ImageView mealActImageView;
+    private TextView mealActMealTxtView;
+    private  TextView mealActMealCategoryTxtView;
+    private TextView mealActMealAreaTextView;
+    private TextView mealActMealInstructionsTxtView;
     private RecyclerView recyclerView;
-    private ArrayList<MealIngredients> mealIngredients;
     private MealIngredientsAdapter mealIngredientsAdapter;
-    WebView webView;
-    ArrayList<MealIngredients> ingredientList;
-
+    private WebView webView;
+    private ArrayList<MealIngredients> ingredientList;
+    private MealActPresenter mealActPresenter;
+    private Button mealActAddToFavBtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,30 +74,20 @@ public class MealActivity extends AppCompatActivity {
                 .into(mealActImageView);
         mealActMealCategoryTxtView.setText(meal.getStrCategory());
         mealActMealAreaTextView.setText(meal.getStrArea());
-        /*presenter code */
-        ingredientList = new ArrayList<>();
 
-        ingredients = new String[]{
-                meal.getStrIngredient1(), meal.getStrIngredient2(), meal.getStrIngredient3(),
-                meal.getStrIngredient4(), meal.getStrIngredient5(), meal.getStrIngredient6(),
-                meal.getStrIngredient7(), meal.getStrIngredient8(), meal.getStrIngredient9(),
-                meal.getStrIngredient10(), meal.getStrIngredient11(), meal.getStrIngredient12(),
-                meal.getStrIngredient13(), meal.getStrIngredient14(), meal.getStrIngredient15(),
-                meal.getStrIngredient16(), meal.getStrIngredient17(), meal.getStrIngredient18(),
-                meal.getStrIngredient19(), meal.getStrIngredient20()
-        };
+        mealActAddToFavBtn = findViewById(R.id.mealActAddToFavBtn);
 
-        measures = new String[]{
-                meal.getStrMeasure1(), meal.getStrMeasure2(), meal.getStrMeasure3(),
-                meal.getStrMeasure4(), meal.getStrMeasure5(), meal.getStrMeasure6(),
-                meal.getStrMeasure7(), meal.getStrMeasure8(), meal.getStrMeasure9(),
-                meal.getStrMeasure10(), meal.getStrMeasure11(), meal.getStrMeasure12(),
-                meal.getStrMeasure13(), meal.getStrMeasure14(), meal.getStrMeasure15(),
-                meal.getStrMeasure16(), meal.getStrMeasure17(), meal.getStrMeasure18(),
-                meal.getStrMeasure19(), meal.getStrMeasure20()
-        };
-        /*end of presenter code */
-        createIngredientList();
+        mealActPresenter = new MealActPresenter(this , Repository.getInstance(MealLocalDataSourceImpl.getInstance(this), RemoteDataSource.getInstance()));
+        mealActPresenter.getMealIngredients(meal);
+        mealActAddToFavBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+            mealActPresenter.addMeal(meal);
+                Toast.makeText(MealActivity.this,meal.getStrMeal()+"added to Favourites",Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
         recyclerView = findViewById(R.id.mealActRecycler);
 
         recyclerView.setHasFixedSize(true);
@@ -103,31 +98,21 @@ public class MealActivity extends AppCompatActivity {
         recyclerView.setAdapter(mealIngredientsAdapter);
 
          webView = findViewById(R.id.mealActWeb);
-
-        webView.loadUrl(meal.getStrYoutube());
-
         webView.getSettings().setJavaScriptEnabled(true);
-
         webView.setWebViewClient(new WebViewClient());
-
-
+        mealActPresenter.loadYoutubeVideo(meal.getStrYoutube());
 
     }
 
-    public void createIngredientList() {
-        // Create an ArrayList to hold Ingredient objects
 
-        String url = "https://www.themealdb.com/images/ingredients/";
-        // Loop through the ingredients and measures
-        for (int i = 0; i < ingredients.length; i++) {
-            String ingredient = ingredients[i];
-            String measure = measures[i];
+    @Override
+    public void setMealIngredients(ArrayList<MealIngredients> mealIngredients) {
+        ingredientList = mealIngredients;
+    }
 
-            // Check if ingredient is not empty before adding to the list
-            if (ingredient != null && !ingredient.isEmpty()) {
-                ingredientList.add(new MealIngredients(ingredient, measure, url + ingredient + "-Small.png"));
-            }
-        }
+    @Override
+    public void loadWebView(String url) {
+        webView.loadUrl(url);
 
     }
 }

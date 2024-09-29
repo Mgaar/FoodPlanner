@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -38,12 +39,14 @@ public class FavAdapter extends RecyclerView.Adapter<FavAdapter.ViewHolder>{
         Button removeButton;
         TextView favouriteMealtextView;
         TextView favouriteMealCategorytextView;
+        CardView cardView;
         public ViewHolder(@NonNull View v) {
             super(v);
             favouriteImageView = v.findViewById(R.id.favouriteImageView);
             removeButton = v.findViewById(R.id.removeButton);
             favouriteMealtextView = v.findViewById(R.id.favouriteMealtextView);
             favouriteMealCategorytextView = v.findViewById(R.id.favouriteMealCategorytextView);
+            cardView=v.findViewById(R.id.favCardView);
         }
 
     }
@@ -59,6 +62,12 @@ public class FavAdapter extends RecyclerView.Adapter<FavAdapter.ViewHolder>{
 
     @Override
     public void onBindViewHolder(@NonNull FavAdapter.ViewHolder holder, int position) {
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                favOnClick.onItemClick(values.get(position));
+            }
+        });
         holder.favouriteMealtextView.setText(values.get(position).getStrMeal());
         holder.removeButton.setOnClickListener(new View.OnClickListener() {
             @Override

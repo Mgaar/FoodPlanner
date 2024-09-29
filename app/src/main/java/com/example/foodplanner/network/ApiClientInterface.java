@@ -21,7 +21,7 @@ public interface ApiClientInterface {
     @GET("search.php")
     Call<MealResponse> getMealByName(@Query("s") String name);
 
-    @GET("list.php?c=list")
+    @GET("categories.php")
     Call<CategoryResponse> getCategories();
 
     @GET("list.php?a=list")

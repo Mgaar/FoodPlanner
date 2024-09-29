@@ -14,9 +14,10 @@
         android:background="@color/item_background_color"
         android:backgroundTintMode="screen"
         android:text="@string/favouritemeals"
-        android:textColor="@color/black"
-        android:textColorHighlight="@color/purple_200"
+        android:textColor="@color/white"
+        android:textColorHighlight="@color/white"
         android:textSize="24sp"
+        android:textStyle="bold|italic"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

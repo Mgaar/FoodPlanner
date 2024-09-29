@@ -1,5 +1,8 @@
 package com.example.foodplanner.ui.fav.view;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -11,13 +14,16 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+import com.example.foodplanner.MainActivity;
 import com.example.foodplanner.R;
 import com.example.foodplanner.database.MealLocalDataSourceImpl;
 import com.example.foodplanner.databinding.FragmentFavouriteBinding;
 import com.example.foodplanner.model.Meal;
 import com.example.foodplanner.model.Repository;
 import com.example.foodplanner.network.RemoteDataSource;
+import com.example.foodplanner.ui.Meal.view.MealActivity;
 import com.example.foodplanner.ui.fav.Presenter.FavPresenter;
 
 import java.util.ArrayList;
@@ -29,6 +35,7 @@ public class FavouriteFragment extends Fragment implements FavOnClick , FavView{
     private ArrayList<Meal> meal;
     private FavAdapter favAdapter;
     private FavPresenter favPresenter;
+    private AlertDialog.Builder builder;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -51,7 +58,9 @@ public class FavouriteFragment extends Fragment implements FavOnClick , FavView{
             recyclerView.setLayoutManager(mgr);
             favPresenter = new FavPresenter(this, Repository.getInstance(MealLocalDataSourceImpl.getInstance(getActivity()), RemoteDataSource.getInstance()));
             favPresenter.getFavMeals(this);
-
+        builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle("Alert !");
+        builder.setCancelable(false);
 
     }
 
@@ -63,7 +72,28 @@ public class FavouriteFragment extends Fragment implements FavOnClick , FavView{
 
     @Override
     public void onRemoveClick(Meal meal) {
-        favPresenter.removeMeal(meal);
+
+        builder.setMessage("if u proceed u will remove " + meal.getStrMeal() );
+        builder.setPositiveButton("Proceed", (DialogInterface.OnClickListener) (dialog, which) -> {
+// When the user click yes button then app will close
+            favPresenter.removeMeal(meal);
+            Toast.makeText(getActivity(),meal.getStrMeal()+" removed ",Toast.LENGTH_SHORT).show();
+        });
+        builder.setNegativeButton("Cancel", (DialogInterface.OnClickListener) (dialog, which) -> {
+            // If user click no then dialog box is canceled.
+            dialog.cancel();
+        });
+        AlertDialog alertDialog = builder.create();
+// Show the Alert Dialog box
+        alertDialog.show();
+
+    }
+
+    @Override
+    public void onItemClick(Meal meal) {
+        Intent intent  = new Intent(this.getActivity(), MealActivity.class);
+        intent.putExtra(MainActivity.MEAL ,meal);
+        startActivity(intent);
     }
 
     @Override

@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 import java.util.ArrayList;
 
 public class CategoryResponse {
-    @SerializedName("meals")
+    @SerializedName("categories")
     private ArrayList<Category> categories;
 
     public CategoryResponse(ArrayList<Category> categories) {

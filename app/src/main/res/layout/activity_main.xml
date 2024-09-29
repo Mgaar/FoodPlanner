@@ -5,6 +5,7 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFFEE7"
     android:backgroundTint="#FFFEE7">
 
     <com.google.android.material.bottomnavigation.BottomNavigationView

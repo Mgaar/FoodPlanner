@@ -54,6 +54,7 @@ public class HomeFragment extends Fragment implements HomeOnClick , HomeView{
             meal = new ArrayList<Meal>();
             TextView textView = view.findViewById(R.id.textView3);
             textView.setText("Daily Inspiration");
+
             homeAdapter = new HomeAdapter(getActivity(), meal,this);
             recyclerView.setAdapter(homeAdapter);
             recyclerView.setHasFixedSize(true);
@@ -75,6 +76,7 @@ public class HomeFragment extends Fragment implements HomeOnClick , HomeView{
     @Override
     public void onFavClick(Meal meal) {
         homePresenter.addToFav(meal);
+        Toast.makeText(getActivity(),meal.getStrMeal()+"added to Favourites",Toast.LENGTH_SHORT).show();
     }
 
     @Override
