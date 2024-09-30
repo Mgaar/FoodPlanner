@@ -63,7 +63,7 @@ public class SearchAreaAdapter extends RecyclerView.Adapter<SearchAreaAdapter.Vi
         holder.searchCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                searchOnClick.onFilterClick(values.get(position).getStrArea());
+                searchOnClick.onFilterAreaClick(values.get(position).getStrArea());
             }
         });
         String[] countryCodes = {

@@ -5,20 +5,22 @@ import android.util.Log;
 import com.example.foodplanner.model.Area;
 import com.example.foodplanner.model.Category;
 import com.example.foodplanner.model.Ingredient;
+import com.example.foodplanner.model.Meal;
 import com.example.foodplanner.model.Repository;
 import com.example.foodplanner.network.AreaNetworkCallBack;
 import com.example.foodplanner.network.CategoryNetworkCallBack;
 import com.example.foodplanner.network.IngredientNetworkCallBack;
-import com.example.foodplanner.ui.search.view.SearchView;
+import com.example.foodplanner.network.MealNetworkCallBack;
+import com.example.foodplanner.ui.search.view.SearchViewer;
 
 import java.util.List;
 
-public class SearchPresenter implements CategoryNetworkCallBack , IngredientNetworkCallBack, AreaNetworkCallBack {
-    private SearchView searchView;
+public class SearchPresenter implements CategoryNetworkCallBack , IngredientNetworkCallBack, AreaNetworkCallBack , MealNetworkCallBack {
+    private SearchViewer searchViewer;
     private Repository repository;
     private static final String TAG = "SearchPresenter";
-    public SearchPresenter(SearchView searchView, Repository repository) {
-        this.searchView = searchView;
+    public SearchPresenter(SearchViewer searchViewer, Repository repository) {
+        this.searchViewer = searchViewer;
         this.repository = repository;
     }
     public void getCategoryList ()
@@ -33,24 +35,33 @@ public class SearchPresenter implements CategoryNetworkCallBack , IngredientNetw
     {
         repository.getAreaList(this);
     }
+    public void getMealSearch (String str)
+    {
+        repository.getMealByName(this,str);
+    }
     @Override
     public void onCategoryNetworkCallBackSuccessfulResult(List<Category> response) {
         Log.i(TAG, "onCategoryNetworkCallBackSuccessfulResult: "+response.get(0));
-        searchView.setCategories(response);
+        searchViewer.setCategories(response);
     }
 
     @Override
     public void onIngredientNetworkCallBackSuccessfulResult(List<Ingredient> response) {
-        searchView.setIngredients(response);
+        searchViewer.setIngredients(response);
     }
 
     @Override
     public void onAreaNetworkCallBackSuccessfulResult(List<Area> response) {
-        searchView.setAreas(response);
+        searchViewer.setAreas(response);
+    }
+
+    @Override
+    public void onMealNetworkCallBackSuccessfulResult(List<Meal> response) {
+        searchViewer.setMeals(response);
     }
 
     @Override
     public void onFailResult(String errStr) {
-searchView.showErr(errStr);
+searchViewer.showErr(errStr);
     }
 }

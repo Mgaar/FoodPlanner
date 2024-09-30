@@ -16,12 +16,17 @@
         android:theme="@style/Theme.FoodPlanner"
         tools:targetApi="31">
         <activity
+            android:name=".calendar"
+            android:exported="false" />
+        <activity
             android:name=".ui.Meal.view.MealActivity"
+            android:exported="false"
             android:theme="@style/Theme.FoodPlanner"
-        android:exported="false" />
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".ui.splash.splash"
-            android:exported="true">
+            android:exported="true"
+            android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -30,8 +35,9 @@
         </activity>
         <activity
             android:name=".MainActivity"
+            android:exported="false"
             android:theme="@style/Theme.FoodPlanner"
-            android:exported="false" />
+            android:windowSoftInputMode="adjustPan" />
     </application>
 
 </manifest>

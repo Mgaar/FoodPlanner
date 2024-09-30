@@ -17,4 +17,5 @@
     <string name="search">Search</string>
     <string name="Category">Category</string>
     <string name="region">Regions</string>
+    <string name="noresult">"Sorry No Result Found "</string>
 </resources>

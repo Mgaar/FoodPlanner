@@ -7,50 +7,6 @@
     android:background="#FFFEE7"
     tools:context=".ui.search.view.SearchFragment" >
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/searchRegionRecycler"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="10dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchAreasFixedTxtView" />
-
-    <TextView
-        android:id="@+id/searchAreasFixedTxtView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="10dp"
-        android:text="@string/region"
-        android:textColor="@color/item_background_color"
-        android:textSize="24sp"
-        android:textStyle="bold|italic"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchIngredientRecycler" />
-
-    <TextView
-        android:id="@+id/searchIngredientsFixedTxtView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="10dp"
-        android:text="@string/ing"
-        android:textColor="@color/item_background_color"
-        android:textSize="24sp"
-        android:textStyle="bold|italic"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchCategoryRecycler" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/searchIngredientRecycler"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="10dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchIngredientsFixedTxtView" />
-
     <TextView
         android:id="@+id/searchTitleTxtView"
         android:layout_width="match_parent"
@@ -66,25 +22,119 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/searchCategoriesFixedTxtView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <SearchView
+        android:id="@+id/searchView"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
         android:layout_marginStart="15dp"
-        android:layout_marginTop="20dp"
-        android:text="@string/Category"
-        android:textColor="@color/item_background_color"
-        android:textSize="24sp"
-        android:textStyle="bold|italic"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="15dp"
+        android:background="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchTitleTxtView" />
+        app:layout_constraintTop_toBottomOf="@+id/searchTitleTxtView">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/searchCategoryRecycler"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="10dp"
+    </SearchView>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="#FFFEE7"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchCategoriesFixedTxtView" />
+        app:layout_constraintTop_toBottomOf="@+id/searchView">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#FFFEE7"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/searchView">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/searchRegionRecycler"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="10dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/searchAreasFixedTxtView" />
+
+            <TextView
+                android:id="@+id/searchAreasFixedTxtView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/region"
+                android:textColor="@color/item_background_color"
+                android:textSize="24sp"
+                android:textStyle="bold|italic"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/searchIngredientRecycler" />
+
+            <TextView
+                android:id="@+id/searchIngredientsFixedTxtView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/ing"
+                android:textColor="@color/item_background_color"
+                android:textSize="24sp"
+                android:textStyle="bold|italic"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/searchCategoryRecycler" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/searchIngredientRecycler"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="10dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/searchIngredientsFixedTxtView" />
+
+            <TextView
+                android:id="@+id/searchCategoriesFixedTxtView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/Category"
+                android:textColor="@color/item_background_color"
+                android:textSize="24sp"
+                android:textStyle="bold|italic"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/searchCategoryRecycler"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="10dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/searchCategoriesFixedTxtView" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/searchUserSearchFrag"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#FFFEE7" />
+
+        <TextView
+            android:id="@+id/searchUserNoResultTxtView"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="20dp"
+            android:background="#FFFEE7"
+            android:text="@string/noresult"
+            android:textColor="@color/item_background_color"
+            android:textSize="16sp"
+            android:textStyle="bold|italic" />
+
+    </FrameLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

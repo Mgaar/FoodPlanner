@@ -38,6 +38,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
     public class ViewHolder extends RecyclerView.ViewHolder{
         ImageView homeMealImageView;
         Button homeFavbutton;
+        Button homwAddToPlan;
         TextView homeMealTextView;
         TextView homeMealAreaTextView;
         TextView homeMealCategoryTextView;
@@ -46,6 +47,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
             super(v);
             homeMealImageView = v.findViewById(R.id.imageView);
             homeFavbutton = v.findViewById(R.id.homeFavbutton);
+
             homeMealTextView = v.findViewById(R.id.homeMealTextView);
             homeMealAreaTextView = v.findViewById(R.id.homeMealAreaTextView);
             homeMealCategoryTextView = v.findViewById(R.id.homeMealCategoryTextView);

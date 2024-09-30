@@ -3,6 +3,7 @@ package com.example.foodplanner;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -33,6 +34,9 @@ public class MainActivity extends AppCompatActivity   {
                 .build();
       navController   = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
         NavigationUI.setupWithNavController(binding.navView, navController);
+
+
+
     }
 
 
