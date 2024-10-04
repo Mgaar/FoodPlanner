@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RadioGroup;
 import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,6 +25,7 @@ import com.example.foodplanner.database.MealLocalDataSourceImpl;
 import com.example.foodplanner.databinding.FragmentSearchBinding;
 import com.example.foodplanner.model.Area;
 import com.example.foodplanner.model.Category;
+import com.example.foodplanner.model.Filter;
 import com.example.foodplanner.model.Ingredient;
 import com.example.foodplanner.model.Meal;
 import com.example.foodplanner.model.Repository;
@@ -41,24 +43,30 @@ public class SearchFragment extends Fragment implements SearchOnClick, SearchVie
     public static final String LIST = "listof";
     public static final String ING = "ingredient";
     public static final String AREA = "area";
+    public static final String NAME = "name";
 
     private RecyclerView recyclerView;
     private RecyclerView searchIngredientRecycler;
     private RecyclerView searchRegionRecycler;
     private SearchView searchViewer;
     private RecyclerView searchUserSearchFragRecycler;
+    private RadioGroup searchRadioGroup;
 
     private List<Category> categories;
     private List<Ingredient> ingredients;
     private List<Area> areas;
     private List<Meal> meals;
+    private List<Filter> filters;
 
     private SearchCategoryAdapter searchCategoryAdapter;
     private SearchIngredientAdapter searchIngredientAdapter;
     private SearchAreaAdapter searchAreaAdapter;
     private SearchMealAdapter searchMealAdapter;
+    private SearchFilterMealAdapter searchFilterMealAdapter;
     private SearchPresenter searchPresenter;
     private FragmentSearchBinding binding;
+
+
 
     TextView searchUserNoResultTxtView ;
     private static final String TAG = "SearchFragment";
@@ -115,12 +123,42 @@ public class SearchFragment extends Fragment implements SearchOnClick, SearchVie
         searchIngredientRecycler.setLayoutManager(ingMgr);
         searchRegionRecycler.setLayoutManager(areaMgr);
 
+        searchRadioGroup = view.findViewById(R.id.searchRadioGroup);
+        searchRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                searchViewer.setQuery("", false);
+                searchViewer.clearFocus();
+
+                    if ( i == R.id.searchByNameRadioButton)
+                    {
+                        searchPresenter.filterChange(NAME);
+                        searchUserSearchFragRecycler.setAdapter(searchMealAdapter);
+                    }
+                    else
+                    {
+                        if (i == R.id.searchByCategoryRadioButton)  searchPresenter.filterChange(CAT);
+                        else if ( i == R.id.searchByIngredientsRadioButton) searchPresenter.filterChange(ING);
+                        else searchPresenter.filterChange(AREA);
+                        searchUserSearchFragRecycler.setAdapter(searchFilterMealAdapter);
+                    }
+
+
+            }
+        });
+
         searchViewer = view.findViewById(R.id.searchView);
         searchUserSearchFragRecycler = view.findViewById(R.id.searchUserSearchFrag);
         searchUserSearchFragRecycler.setVisibility(View.GONE);
+
         meals = new ArrayList<Meal>();
+        filters = new ArrayList<Filter>();
+
         searchMealAdapter = new SearchMealAdapter(getActivity(),meals,this);
+        searchFilterMealAdapter = new SearchFilterMealAdapter(getActivity(),filters,this);
+
         searchUserSearchFragRecycler.setAdapter(searchMealAdapter);
+
         searchUserSearchFragRecycler.setHasFixedSize(true);
         LinearLayoutManager userSearchMgr = new LinearLayoutManager(getActivity());
         userSearchMgr.setOrientation(RecyclerView.VERTICAL);
@@ -148,14 +186,11 @@ searchViewer.setIconified(false);
                 {
                     searchUserSearchFragRecycler.setVisibility(View.GONE);
                     searchUserNoResultTxtView.setVisibility(View.GONE);
-
                 }
                 else
                 {
                     searchPresenter.getMealSearch(newText);
                     searchUserSearchFragRecycler.setVisibility(View.VISIBLE);
-
-
                 }
                 return false;
             }
@@ -205,6 +240,11 @@ searchViewer.setIconified(false);
     }
 
     @Override
+    public void onUserSearchFilterClick(String meal) {
+
+    }
+
+    @Override
     public void setCategories(List<Category> categories) {
 
         searchCategoryAdapter.setValues(categories);
@@ -229,14 +269,28 @@ searchViewer.setIconified(false);
         {
             searchUserNoResultTxtView.setVisibility(View.VISIBLE);
             searchUserSearchFragRecycler.setVisibility(View.GONE);
-
-
         }
         else
         {
             searchUserNoResultTxtView.setVisibility(View.GONE);
             searchMealAdapter.setValues(meals);
             searchMealAdapter.notifyDataSetChanged();
+        }
+
+    }
+
+    @Override
+    public void setFilterMeals(List<Filter> meals) {
+        if (meals == null )
+        {
+            searchUserNoResultTxtView.setVisibility(View.VISIBLE);
+            searchUserSearchFragRecycler.setVisibility(View.GONE);
+        }
+        else
+        {
+            searchUserNoResultTxtView.setVisibility(View.GONE);
+            searchFilterMealAdapter.setValues(meals);
+            searchFilterMealAdapter.notifyDataSetChanged();
         }
 
     }

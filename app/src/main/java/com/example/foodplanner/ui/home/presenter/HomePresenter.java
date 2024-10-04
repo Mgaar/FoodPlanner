@@ -11,10 +11,10 @@ public class HomePresenter implements MealNetworkCallBack {
 
     private HomeView homeView;
     private Repository repository;
-
     public HomePresenter(HomeView homeView, Repository repository) {
         this.homeView = homeView;
         this.repository = repository;
+
     }
 
     public void getMeals (){repository.getRandomMeal(this);}
@@ -32,4 +32,7 @@ public class HomePresenter implements MealNetworkCallBack {
     {
         repository.insertFavouriteMeal(meal);
     }
+
+
+
 }

@@ -8,26 +8,142 @@
     android:backgroundTint="@color/white"
     tools:context=".ui.home.view.HomeFragment">
 
-    <TextView
-        android:id="@+id/textView3"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="38dp"
-        android:background="@color/item_background_color"
-        android:backgroundTintMode="screen"
-        android:text="TextView"
-        android:textColor="@color/white"
-        android:textSize="24sp"
-        android:textStyle="bold|italic"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_height="match_parent">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerview"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:background="#FFFEE7"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3"
-        tools:layout_editor_absoluteX="16dp" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/networkLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="match_parent"
+                android:layout_height="38dp"
+                android:background="@color/item_background_color"
+                android:backgroundTintMode="screen"
+                android:text="TextView"
+                android:textColor="@color/white"
+                android:textSize="24sp"
+                android:textStyle="bold|italic"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerview"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:background="#FFFEE7"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/noNetworkLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#FFFEE7">
+
+            <TextView
+                android:id="@+id/noNetworkViewMyPlan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="#FFFEE7"
+                android:backgroundTintMode="screen"
+                android:clickable="true"
+                android:text=" View My Plan "
+                android:textColor="@color/item_background_color"
+                android:textSize="24sp"
+                android:textStyle="bold|italic"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/underline" />
+
+            <TextView
+                android:id="@+id/noNetworkTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="38dp"
+                android:layout_marginTop="100dp"
+                android:background="#FFFEE7"
+                android:backgroundTintMode="screen"
+                android:text="    Sorry No Internet Connection "
+                android:textColor="@color/item_background_color"
+                android:textSize="24sp"
+                android:textStyle="bold|italic"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="207dp"
+                android:layout_height="248dp"
+                android:layout_marginTop="40dp"
+                android:src="@drawable/baseline_signal_wifi_off_24"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/noNetworkTxt" />
+
+            <Button
+                android:id="@+id/noNetworkTryAgainButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:backgroundTint="@color/item_background_color"
+                android:text="@string/tryagain"
+                android:textColor="#FFFEE7"
+                android:textColorLink="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+
+            <TextView
+                android:id="@+id/noNetworkViewFavMeals"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:background="#FFFEE7"
+                android:backgroundTintMode="screen"
+                android:clickable="true"
+                android:text=" View Favourite Meals "
+                android:textColor="@color/item_background_color"
+                android:textSize="24sp"
+                android:textStyle="bold|italic"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/noNetworkTryAgainButton" />
+
+            <TextView
+                android:id="@+id/underline"
+                android:layout_width="225dp"
+                android:layout_height="1dp"
+                android:layout_marginStart="5dp"
+                android:background="@color/item_background_color"
+                android:text="TextView"
+                app:layout_constraintStart_toStartOf="@+id/noNetworkViewFavMeals"
+                app:layout_constraintTop_toBottomOf="@+id/noNetworkViewFavMeals" />
+
+            <TextView
+                android:id="@+id/underlineTwo"
+                android:layout_width="145dp"
+                android:layout_height="1dp"
+                android:layout_marginStart="5dp"
+                android:background="@color/item_background_color"
+                android:text="TextView"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/noNetworkViewMyPlan"
+                app:layout_constraintTop_toBottomOf="@+id/noNetworkViewMyPlan" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </FrameLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

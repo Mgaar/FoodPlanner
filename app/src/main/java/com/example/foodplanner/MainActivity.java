@@ -1,12 +1,14 @@
 package com.example.foodplanner;
 
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.MenuItem;
+
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -17,7 +19,9 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 
 
+
 public class MainActivity extends AppCompatActivity   {
+    private static final String TAG = "MainActivity";
     public static final String MEAL = "meal";
     private ActivityMainBinding binding;
     private NavController navController;
@@ -26,6 +30,7 @@ public class MainActivity extends AppCompatActivity   {
         super.onCreate(savedInstanceState);
 
 
+       
      binding = ActivityMainBinding.inflate(getLayoutInflater());
       setContentView(binding.getRoot());
       BottomNavigationView navView = findViewById(R.id.nav_view);

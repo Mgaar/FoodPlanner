@@ -1,16 +1,25 @@
 package com.example.foodplanner.ui.home.view;
 
+import static androidx.core.content.ContextCompat.getSystemService;
+
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -35,7 +44,13 @@ public class HomeFragment extends Fragment implements HomeOnClick , HomeView{
     private RecyclerView recyclerView;
     private ArrayList<Meal> meal;
     private HomeAdapter homeAdapter;
-    HomePresenter homePresenter;
+    private HomePresenter homePresenter;
+    private ConstraintLayout networkLayout;
+    private ConstraintLayout noNetworkLayout;
+    private Button noNetworkTryAgainButton;
+    private TextView noNetworkViewFavMeals;
+    private TextView noNetworkViewMyPlan;
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
@@ -63,6 +78,43 @@ public class HomeFragment extends Fragment implements HomeOnClick , HomeView{
             recyclerView.setLayoutManager(mgr);
             homePresenter = new HomePresenter(this, Repository.getInstance(MealLocalDataSourceImpl.getInstance(getActivity()), RemoteDataSource.getInstance()));
             homePresenter.getMeals();
+        noNetworkTryAgainButton = view.findViewById(R.id.noNetworkTryAgainButton);
+        noNetworkTryAgainButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(isOnline())
+                {
+                    homePresenter.getMeals();
+                    noNetworkLayout.setVisibility(View.GONE);
+                    networkLayout.setVisibility(View.VISIBLE);
+                }
+                else
+                {
+                    noNetworkLayout.setVisibility(View.VISIBLE);
+                    networkLayout.setVisibility(View.GONE);
+                }
+            }
+        });
+        noNetworkViewFavMeals =view.findViewById(R.id.noNetworkViewFavMeals);
+        noNetworkViewFavMeals.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                NavController navController = NavHostFragment.findNavController(HomeFragment.this);
+
+                navController.navigate(R.id.navigation_favourite);
+            }
+        });
+        noNetworkViewMyPlan = view.findViewById(R.id.noNetworkViewMyPlan);
+        noNetworkViewMyPlan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                NavController navController = NavHostFragment.findNavController(HomeFragment.this);
+
+                navController.navigate(R.id.navigation_calender);
+            }
+        });
+        noNetworkLayout = view.findViewById(R.id.noNetworkLayout);
+        networkLayout = view.findViewById(R.id.networkLayout);
 
 
 
@@ -72,6 +124,21 @@ public class HomeFragment extends Fragment implements HomeOnClick , HomeView{
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        if(isOnline())
+        {
+            noNetworkLayout.setVisibility(View.GONE);
+            networkLayout.setVisibility(View.VISIBLE);
+        }
+        else
+        {
+            noNetworkLayout.setVisibility(View.VISIBLE);
+            networkLayout.setVisibility(View.GONE);
+        }
     }
 
     @Override
@@ -103,5 +170,11 @@ public class HomeFragment extends Fragment implements HomeOnClick , HomeView{
     @Override
     public void showError(String str) {
         Toast.makeText(getActivity(), str, Toast.LENGTH_SHORT).show();
+    }
+
+    public boolean isOnline() {
+        ConnectivityManager connMgr = (ConnectivityManager) getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+        return (networkInfo != null && networkInfo.isConnected());
     }
 }

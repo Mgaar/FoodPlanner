@@ -7,4 +7,5 @@ public interface SearchOnClick {
     void onFilterIngredientClick (String string);
     void onFilterAreaClick (String string);
     void onUserSearchClick (Meal meal);
+    void onUserSearchFilterClick(String meal);
 }

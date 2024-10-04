@@ -26,7 +26,7 @@ LifecycleOwner lifecycleOwner;
     public CalendarFragPresenter(CalendarFragView calendarFragView, Repository repository) {
         this.repository = repository;
         this.calendarFragView = calendarFragView;
-        calendar = Calendar.getInstance();
+        calendar = Calendar.getInstance(Locale.US);
 
         //set the first day to be today to get
         calendar.set(Calendar.DAY_OF_WEEK, calendar.getFirstDayOfWeek());

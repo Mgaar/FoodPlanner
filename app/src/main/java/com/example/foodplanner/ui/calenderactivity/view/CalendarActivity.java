@@ -29,6 +29,7 @@ import com.example.foodplanner.ui.calenderactivity.presenter.CalenderActPresente
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
 public class CalendarActivity extends AppCompatActivity implements CalenderActivityView{
@@ -64,29 +65,39 @@ private CalenderActPresenter calenderActPresenter;
         calendarActMealTxtView.setText(meal.getStrMeal());
 
 
-        Calendar calendar = Calendar.getInstance();
+        Calendar calendar = Calendar.getInstance(Locale.US);
+        year = calendar.get(Calendar.YEAR); // Get the current year
+        month = calendar.get(Calendar.MONTH); // Get the current month (0-based, January = 0)
+        day = calendar.get(Calendar.DAY_OF_MONTH);
+        Log.i(TAG, "onCreate: "+day + month + year);
         long today = calendar.getTimeInMillis();
         calendarActCalendarView.setMinDate(today);
         calenderActPresenter = new CalenderActPresenter(this ,Repository.getInstance(MealLocalDataSourceImpl.getInstance(CalendarActivity.this), RemoteDataSource.getInstance()));
         calendarActCalendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView calendarView, int i, int i1, int i2) {
+                Log.i(TAG, "onSelectedDayChange: "+i+i1+i2);
                 if ((i == i1) &&(0 == i2)&&(i1 == 0))
                 {
-                     i = calendar.get(Calendar.YEAR); // Get the current year
-                     i1 = calendar.get(Calendar.MONTH); // Get the current month (0-based, January = 0)
-                     i2 = calendar.get(Calendar.DAY_OF_MONTH);
+                     year = calendar.get(Calendar.YEAR); // Get the current year
+                     month = calendar.get(Calendar.MONTH); // Get the current month (0-based, January = 0)
+                     day = calendar.get(Calendar.DAY_OF_MONTH);
+                    Log.i(TAG, "onSelectedDayChange: ");
                 }
-                year = i;
-                month = i1;
-                day = i2;
+                else
+                {
+                    year = i;
+                    month = i1;
+                    day = i2;
+                }
+
             }
         });
         calendarActAddBtn = findViewById(R.id.calendarActAddBtn);
         calendarActAddBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Log.i(TAG, "onClick: "+day+month+year);
                 calenderActPresenter.addPlannedMeal(new PlannedMeal(meal,day,month,year));
                 Toast.makeText(CalendarActivity.this,meal.getStrMeal()+" added sucessfully",Toast.LENGTH_SHORT).show();
                 finish();

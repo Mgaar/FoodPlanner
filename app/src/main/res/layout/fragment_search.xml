@@ -36,13 +36,58 @@
 
     </SearchView>
 
+    <RadioGroup
+        android:id="@+id/searchRadioGroup"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:checkedButton="@id/searchByNameRadioButton"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@+id/searchView">
+
+        <RadioButton
+            android:id="@+id/searchByNameRadioButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/name"
+            android:textColor="@color/item_background_color"
+            android:textStyle="bold|italic" />
+
+        <RadioButton
+            android:id="@+id/searchByCategoryRadioButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/Category"
+            android:textColor="@color/item_background_color"
+            android:textStyle="bold|italic" />
+
+        <RadioButton
+            android:id="@+id/searchByIngredientsRadioButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/ing"
+            android:textColor="@color/item_background_color"
+            android:textStyle="bold|italic" />
+
+        <RadioButton
+            android:id="@+id/searchByRegionRadioButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/region"
+            android:textColor="@color/item_background_color"
+            android:textStyle="bold|italic" />
+    </RadioGroup>
+
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:background="#FFFEE7"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchView">
+        app:layout_constraintTop_toBottomOf="@+id/searchRadioGroup">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout"
@@ -133,8 +178,9 @@
             android:background="#FFFEE7"
             android:text="@string/noresult"
             android:textColor="@color/item_background_color"
-            android:textSize="16sp"
+            android:textSize="24sp"
             android:textStyle="bold|italic" />
 
     </FrameLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
