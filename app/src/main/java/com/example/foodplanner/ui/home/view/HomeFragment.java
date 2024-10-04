@@ -14,6 +14,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.foodplanner.ui.calenderactivity.view.CalendarActivity;
 import com.example.foodplanner.MainActivity;
 import com.example.foodplanner.R;
 import com.example.foodplanner.database.MealLocalDataSourceImpl;
@@ -48,8 +49,7 @@ public class HomeFragment extends Fragment implements HomeOnClick , HomeView{
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        if(savedInstanceState == null )
-        {
+
             recyclerView=view.findViewById(R.id.recyclerview);
             meal = new ArrayList<Meal>();
             TextView textView = view.findViewById(R.id.textView3);
@@ -63,7 +63,8 @@ public class HomeFragment extends Fragment implements HomeOnClick , HomeView{
             recyclerView.setLayoutManager(mgr);
             homePresenter = new HomePresenter(this, Repository.getInstance(MealLocalDataSourceImpl.getInstance(getActivity()), RemoteDataSource.getInstance()));
             homePresenter.getMeals();
-        }
+
+
 
     }
 
@@ -82,6 +83,13 @@ public class HomeFragment extends Fragment implements HomeOnClick , HomeView{
     @Override
     public void onItimClick(Meal meal) {
         Intent intent  = new Intent(this.getActivity(), MealActivity.class);
+        intent.putExtra(MainActivity.MEAL ,meal);
+        startActivity(intent);
+    }
+
+    @Override
+    public void onPlanClick(Meal meal) {
+        Intent intent  = new Intent(this.getActivity(), CalendarActivity.class);
         intent.putExtra(MainActivity.MEAL ,meal);
         startActivity(intent);
     }

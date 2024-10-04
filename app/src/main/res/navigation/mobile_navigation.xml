@@ -28,7 +28,7 @@
 
     <fragment
         android:id="@+id/navigation_calender"
-        android:name="com.example.foodplanner.ui.calender.CalenderFragment"
+        android:name="com.example.foodplanner.ui.calendar.view.CalendarFragment"
         android:label="@string/mealplan"
         tools:layout="@layout/fragment_calender" />
 

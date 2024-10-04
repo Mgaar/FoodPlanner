@@ -47,7 +47,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
             super(v);
             homeMealImageView = v.findViewById(R.id.imageView);
             homeFavbutton = v.findViewById(R.id.homeFavbutton);
-
+            homwAddToPlan = v.findViewById(R.id.homwAddToPlan);
             homeMealTextView = v.findViewById(R.id.homeMealTextView);
             homeMealAreaTextView = v.findViewById(R.id.homeMealAreaTextView);
             homeMealCategoryTextView = v.findViewById(R.id.homeMealCategoryTextView);
@@ -70,6 +70,12 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
             @Override
             public void onClick(View view) {
                 homeOnClick.onFavClick(values.get(position));
+            }
+        });
+        holder.homwAddToPlan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                homeOnClick.onPlanClick(values.get(position));
             }
         });
         holder.homeMealImageView.setOnClickListener(new View.OnClickListener() {

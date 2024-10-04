@@ -16,7 +16,7 @@
         android:theme="@style/Theme.FoodPlanner"
         tools:targetApi="31">
         <activity
-            android:name=".calendar"
+            android:name=".ui.calenderactivity.view.CalendarActivity"
             android:exported="false" />
         <activity
             android:name=".ui.Meal.view.MealActivity"

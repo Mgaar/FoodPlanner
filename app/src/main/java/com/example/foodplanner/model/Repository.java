@@ -64,8 +64,9 @@ public class Repository {
     {
         remoteDataSource.makeFilterIngredientListNetworkCallBack(filterNetworkCallBack,ingredient);
     }
-    public void insertMeal (Meal meal)
+    public void insertFavouriteMeal(Meal meal)
     {
+        meal.setFav(true);
         mealLocalDataSource.insertMeal(meal);
     }
     public void deleteMeal (Meal meal)
@@ -73,6 +74,19 @@ public class Repository {
         mealLocalDataSource.removeMeal(meal);
     }
     public LiveData<List<Meal>> getStoredMeals (){return mealLocalDataSource.getAllMeals();}
+
+
+    public void insertPlannedMeal(PlannedMeal meal)
+    {
+        mealLocalDataSource.insertPlannedMeal(meal);
+    }
+
+    public void deletePlannedMeal (PlannedMeal meal)
+    {
+        mealLocalDataSource.deletePlannedMeal(meal);
+    }
+
+    public LiveData<List<PlannedMeal>> getPlannedStoredMeals (int day,int month,int year){return mealLocalDataSource.getDayPlannedMeals(day,month,year);}
 
 
 }

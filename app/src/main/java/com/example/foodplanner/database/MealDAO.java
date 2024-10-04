@@ -14,6 +14,7 @@ import java.util.List;
 public interface MealDAO {
     @Query("Select * FROM meals_table")
     LiveData<List<Meal>> getAllMeals ();
+
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     void insertMeal (Meal meal);
     @Delete

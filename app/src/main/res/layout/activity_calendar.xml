@@ -5,6 +5,95 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".calendar">
+    android:background="#FFFEE7"
+    tools:context=".ui.calenderactivity.view.CalendarActivity">
+
+
+    <TextView
+        android:id="@+id/calendarActTextView"
+        android:layout_width="match_parent"
+        android:layout_height="38dp"
+        android:layout_marginTop="23dp"
+        android:background="@color/item_background_color"
+        android:text="@string/whatday"
+        android:textColor="@color/white"
+        android:textColorLink="@color/white"
+        android:textSize="20sp"
+        android:textStyle="bold|italic"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <CalendarView
+        android:id="@+id/calendarActCalendarView"
+        android:theme="@style/CalenderViewCustom"
+        android:dateTextAppearance="@style/CalenderViewDateCustomText"
+        android:weekDayTextAppearance="@style/CalenderViewWeekCustomText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:weekNumberColor="@color/item_background_color"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/calendarActCardView" />
+
+    <Button
+        android:id="@+id/calendarActAddBtn"
+        android:layout_width="170dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/item_background_color"
+        android:text="@string/add"
+        android:textColor="#FFFEE7"
+        android:textColorLink="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/calendarActCalendarView" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/calendarActCardView"
+        android:layout_width="200dp"
+        android:layout_height="160dp"
+        android:layout_marginTop="25dp"
+        android:background="@color/white"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/calendarActTextView">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <ImageView
+                android:id="@+id/calendarActImageView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                tools:srcCompat="@tools:sample/avatars" />
+
+            <View
+                android:id="@+id/calendarActview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/gradient" />
+
+            <TextView
+                android:id="@+id/calendarActMealTxtView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|center"
+                android:gravity="center"
+                android:padding="16dp"
+                android:shadowColor="@color/white"
+                android:text="TextView"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+        </FrameLayout>
+    </androidx.cardview.widget.CardView>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

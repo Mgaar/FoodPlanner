@@ -30,6 +30,6 @@ public class HomePresenter implements MealNetworkCallBack {
 
     public  void addToFav (Meal meal)
     {
-        repository.insertMeal(meal);
+        repository.insertFavouriteMeal(meal);
     }
 }

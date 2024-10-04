@@ -51,7 +51,7 @@ public class MealActPresenter {
     }
     public void addMeal(Meal meal)
     {
-        repository.insertMeal(meal);
+        repository.insertFavouriteMeal(meal);
     }
     public void loadYoutubeVideo(String youtubeUrl) {
         String youtubeEmbedUrl = "https://www.youtube.com/embed/" + getYoutubeVideoId(youtubeUrl);

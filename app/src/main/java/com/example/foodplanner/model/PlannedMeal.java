@@ -2,17 +2,15 @@ package com.example.foodplanner.model;
 
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
-
 import androidx.room.PrimaryKey;
 
-import java.io.Serializable;
-
-@Entity(tableName = "meals_table")
-public class Meal implements Serializable {
-
-    @PrimaryKey
+@Entity(tableName = "calender_table" ,primaryKeys = {"idMeal", "day","month","year"})
+public class PlannedMeal {
     @NonNull
     private String idMeal;
+    private int day;
+    private int month;
+    private int year;
     private String strMeal;
     private String strDrinkAlternate;
     private String strCategory;
@@ -37,9 +35,9 @@ public class Meal implements Serializable {
     private String strIngredient14;
     private String strIngredient15;
     private String strIngredient16;
-   private String strIngredient17;
-   private String strIngredient18;
-   private String strIngredient19;
+    private String strIngredient17;
+    private String strIngredient18;
+    private String strIngredient19;
     private String strIngredient20;
     private String strMeasure1;
     private String strMeasure2;
@@ -66,14 +64,69 @@ public class Meal implements Serializable {
     private String strCreativeCommonsConfirmed;
     private String dateModified;
 
-    private long day;
-    private boolean isFav=false;
-
-    public Meal() {
+    public PlannedMeal(Meal meal, int day,int month , int year) {
+        this.idMeal = meal.getIdMeal();
+        this.strMeal = meal.getStrMeal();
+        this.strDrinkAlternate = meal.getStrDrinkAlternate();
+        this.strCategory = meal.getStrCategory();
+        this.strArea = meal.getStrArea();
+        this.strInstructions = meal.getStrInstructions();
+        this.strMealThumb = meal.getStrMealThumb();
+        this.strTags = meal.getStrTags();
+        this.strYoutube = meal.getStrYoutube();
+        this.strIngredient1 = meal.getStrIngredient1();
+        this.strIngredient2 = meal.getStrIngredient2();
+        this.strIngredient3 = meal.getStrIngredient3();
+        this.strIngredient4 = meal.getStrIngredient4();
+        this.strIngredient5 = meal.getStrIngredient5();
+        this.strIngredient6 = meal.getStrIngredient6();
+        this.strIngredient7 = meal.getStrIngredient7();
+        this.strIngredient8 = meal.getStrIngredient8();
+        this.strIngredient9 = meal.getStrIngredient9();
+        this.strIngredient10 = meal.getStrIngredient10();
+        this.strIngredient11 = meal.getStrIngredient11();
+        this.strIngredient12 = meal.getStrIngredient12();
+        this.strIngredient13 = meal.getStrIngredient13();
+        this.strIngredient14 = meal.getStrIngredient14();
+        this.strIngredient15 = meal.getStrIngredient15();
+        this.strIngredient16 = meal.getStrIngredient16();
+        this.strIngredient17 = meal.getStrIngredient17();
+        this.strIngredient18 = meal.getStrIngredient18();
+        this.strIngredient19 = meal.getStrIngredient19();
+        this.strIngredient20 = meal.getStrIngredient20();
+        this.strMeasure1 = meal.getStrMeasure1();
+        this.strMeasure2 = meal.getStrMeasure2();
+        this.strMeasure3 = meal.getStrMeasure3();
+        this.strMeasure4 = meal.getStrMeasure4();
+        this.strMeasure5 = meal.getStrMeasure5();
+        this.strMeasure6 = meal.getStrMeasure6();
+        this.strMeasure7 = meal.getStrMeasure7();
+        this.strMeasure8 = meal.getStrMeasure8();
+        this.strMeasure9 = meal.getStrMeasure9();
+        this.strMeasure10 = meal.getStrMeasure10();
+        this.strMeasure11 = meal.getStrMeasure11();
+        this.strMeasure12 = meal.getStrMeasure12();
+        this.strMeasure13 = meal.getStrMeasure13();
+        this.strMeasure14 = meal.getStrMeasure14();
+        this.strMeasure15 = meal.getStrMeasure15();
+        this.strMeasure16 = meal.getStrMeasure16();
+        this.strMeasure17 = meal.getStrMeasure17();
+        this.strMeasure18 = meal.getStrMeasure18();
+        this.strMeasure19 = meal.getStrMeasure19();
+        this.strMeasure20 = meal.getStrMeasure20();
+        this.strSource = meal.getStrSource();
+        this.strImageSource = meal.getStrImageSource();
+        this.strCreativeCommonsConfirmed = meal.getStrCreativeCommonsConfirmed();
+        this.dateModified = meal.getDateModified();
+        this.day = day;
+        this.month = month;
+        this.year = year;
     }
-
-    public Meal(@NonNull String idMeal, String strMeal, String strDrinkAlternate, String strCategory, String strArea, String strInstructions, String strMealThumb, String strTags, String strYoutube, String strIngredient1, String strIngredient2, String strIngredient3, String strIngredient4, String strIngredient5, String strIngredient6, String strIngredient7, String strIngredient8, String strIngredient9, String strIngredient10, String strIngredient11, String strIngredient12, String strIngredient13, String strIngredient14, String strIngredient15, String strIngredient16, String strIngredient17, String strIngredient18, String strIngredient19, String strIngredient20, String strMeasure1, String strMeasure2, String strMeasure3, String strMeasure4, String strMeasure5, String strMeasure6, String strMeasure7, String strMeasure8, String strMeasure9, String strMeasure10, String strMeasure11, String strMeasure12, String strMeasure13, String strMeasure14, String strMeasure15, String strMeasure16, String strMeasure17, String strMeasure18, String strMeasure19, String strMeasure20, String strSource, String strImageSource, String strCreativeCommonsConfirmed, String dateModified, long day, boolean isFav) {
+    public PlannedMeal(@NonNull String idMeal, int day, int month, int year, String strMeal, String strDrinkAlternate, String strCategory, String strArea, String strInstructions, String strMealThumb, String strTags, String strYoutube, String strIngredient1, String strIngredient2, String strIngredient3, String strIngredient4, String strIngredient5, String strIngredient6, String strIngredient7, String strIngredient8, String strIngredient9, String strIngredient10, String strIngredient11, String strIngredient12, String strIngredient13, String strIngredient14, String strIngredient15, String strIngredient16, String strIngredient17, String strIngredient18, String strIngredient19, String strIngredient20, String strMeasure1, String strMeasure2, String strMeasure3, String strMeasure4, String strMeasure5, String strMeasure6, String strMeasure7, String strMeasure8, String strMeasure9, String strMeasure10, String strMeasure11, String strMeasure12, String strMeasure13, String strMeasure14, String strMeasure15, String strMeasure16, String strMeasure17, String strMeasure18, String strMeasure19, String strMeasure20, String strSource, String strImageSource, String strCreativeCommonsConfirmed, String dateModified) {
         this.idMeal = idMeal;
+        this.day = day;
+        this.month = month;
+        this.year = year;
         this.strMeal = strMeal;
         this.strDrinkAlternate = strDrinkAlternate;
         this.strCategory = strCategory;
@@ -126,33 +179,39 @@ public class Meal implements Serializable {
         this.strImageSource = strImageSource;
         this.strCreativeCommonsConfirmed = strCreativeCommonsConfirmed;
         this.dateModified = dateModified;
-
-        this.day = day;
-        this.isFav = isFav;
     }
 
-    public long getDay() {
-        return day;
-    }
-
-    public void setDay(long day) {
-        this.day = day;
-    }
-
-    public boolean isFav() {
-        return isFav;
-    }
-
-    public void setFav(boolean fav) {
-        isFav = fav;
-    }
-
+    @NonNull
     public String getIdMeal() {
         return idMeal;
     }
 
-    public void setIdMeal(String idMeal) {
+    public void setIdMeal(@NonNull String idMeal) {
         this.idMeal = idMeal;
+    }
+
+    public int getDay() {
+        return day;
+    }
+
+    public void setDay(int day) {
+        this.day = day;
+    }
+
+    public int getMonth() {
+        return month;
+    }
+
+    public void setMonth(int month) {
+        this.month = month;
+    }
+
+    public int getYear() {
+        return year;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
     }
 
     public String getStrMeal() {
