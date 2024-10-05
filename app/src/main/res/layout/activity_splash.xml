@@ -19,4 +19,18 @@
         app:lottie_loop="true"
         app:lottie_rawRes="@raw/animation"
         tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#FFFEE7"
+        android:text="@string/foodplanner"
+        android:textColor="@color/item_background_color"
+        android:textSize="34sp"
+        android:textStyle="bold|italic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/animation_view" />
 </androidx.constraintlayout.widget.ConstraintLayout>

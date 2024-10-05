@@ -31,6 +31,7 @@ import com.example.foodplanner.model.MealIngredients;
 import com.example.foodplanner.model.Repository;
 import com.example.foodplanner.network.RemoteDataSource;
 import com.example.foodplanner.ui.Meal.presenter.MealActPresenter;
+import com.example.foodplanner.ui.calenderactivity.view.CalendarActivity;
 import com.example.foodplanner.ui.fav.Presenter.FavPresenter;
 import com.example.foodplanner.ui.fav.view.FavAdapter;
 
@@ -50,6 +51,7 @@ public class MealActivity extends AppCompatActivity implements MealActView{
     private ArrayList<MealIngredients> ingredientList;
     private MealActPresenter mealActPresenter;
     private Button mealActAddToFavBtn;
+    private Button mealActAddToPlanBtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -88,6 +90,16 @@ public class MealActivity extends AppCompatActivity implements MealActView{
             }
         });
 
+        mealActAddToPlanBtn = findViewById(R.id.mealActAddToPlanBtn);
+        mealActAddToPlanBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent  = new Intent(MealActivity.this, CalendarActivity.class);
+                intent.putExtra(MainActivity.MEAL ,meal);
+                startActivity(intent);
+            }
+        });
+
         recyclerView = findViewById(R.id.mealActRecycler);
 
         recyclerView.setHasFixedSize(true);
@@ -115,4 +127,5 @@ public class MealActivity extends AppCompatActivity implements MealActView{
         webView.loadUrl(url);
 
     }
+
 }

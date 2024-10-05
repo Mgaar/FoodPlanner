@@ -82,7 +82,8 @@ listFragRecyclerView.setAdapter(listAdapter);
         listFragRecyclerView.setHasFixedSize(true);
         GridLayoutManager layoutManager=new GridLayoutManager(getActivity(),2);
         listFragRecyclerView.setLayoutManager(layoutManager);
-
+        bottomNavigationView = requireActivity().findViewById(R.id.nav_view);
+        bottomNavigationView.setVisibility(View.GONE);
     }
 
     @Override
@@ -111,7 +112,6 @@ listAdapter.notifyDataSetChanged();
     @Override
     public void onResume() {
         super.onResume();
-        bottomNavigationView = requireActivity().findViewById(R.id.nav_view);
-        bottomNavigationView.setSelectedItemId(R.id.navigation_search);
+
     }
 }

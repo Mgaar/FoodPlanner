@@ -1,11 +1,15 @@
 package com.example.foodplanner.ui.search.view;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.RadioGroup;
 import android.widget.SearchView;
 import android.widget.TextView;
@@ -13,6 +17,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
@@ -31,6 +36,7 @@ import com.example.foodplanner.model.Meal;
 import com.example.foodplanner.model.Repository;
 import com.example.foodplanner.network.RemoteDataSource;
 import com.example.foodplanner.ui.Meal.view.MealActivity;
+import com.example.foodplanner.ui.home.view.HomeFragment;
 import com.example.foodplanner.ui.search.presenter.SearchPresenter;
 
 import java.util.ArrayList;
@@ -66,7 +72,11 @@ public class SearchFragment extends Fragment implements SearchOnClick, SearchVie
     private SearchPresenter searchPresenter;
     private FragmentSearchBinding binding;
 
-
+    private ConstraintLayout SearchNetworkLayout;
+    private ConstraintLayout SearchNoNetworkLayout;
+    private Button SearchNoNetworkTryAgainButton;
+    private TextView SearchNoNetworkViewFavMeals;
+    private TextView SearchNoNetworkViewMyPlan;
 
     TextView searchUserNoResultTxtView ;
     private static final String TAG = "SearchFragment";
@@ -196,12 +206,66 @@ searchViewer.setIconified(false);
             }
         });
 
+        SearchNoNetworkTryAgainButton = view.findViewById(R.id.SearchNoNetworkTryAgainButton);
+        SearchNoNetworkTryAgainButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(isOnline())
+                {
+                    searchPresenter.getCategoryList();
+                    searchPresenter.getIngredientList();
+                    searchPresenter.getAreaList();
+                    SearchNoNetworkLayout.setVisibility(View.GONE);
+                    SearchNetworkLayout.setVisibility(View.VISIBLE);
+                }
+                else
+                {
+                    SearchNoNetworkLayout.setVisibility(View.VISIBLE);
+                    SearchNetworkLayout.setVisibility(View.GONE);
+                }
+            }
+        });
+        SearchNoNetworkViewFavMeals =view.findViewById(R.id.SearchNoNetworkViewFavMeals);
+        SearchNoNetworkViewFavMeals.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                NavController navController = NavHostFragment.findNavController(SearchFragment.this);
+
+                navController.navigate(R.id.navigation_favourite);
+            }
+        });
+        SearchNoNetworkViewMyPlan = view.findViewById(R.id.SearchNoNetworkViewMyPlan);
+        SearchNoNetworkViewMyPlan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                NavController navController = NavHostFragment.findNavController(SearchFragment.this);
+
+                navController.navigate(R.id.navigation_calender);
+            }
+        });
+        SearchNoNetworkLayout = view.findViewById(R.id.searchNoNetworkLayout);
+        SearchNetworkLayout = view.findViewById(R.id.searchNetworkLayout);
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        if(isOnline())
+        {
+            SearchNoNetworkLayout.setVisibility(View.GONE);
+            SearchNetworkLayout.setVisibility(View.VISIBLE);
+        }
+        else
+        {
+            SearchNoNetworkLayout.setVisibility(View.VISIBLE);
+            SearchNetworkLayout.setVisibility(View.GONE);
+        }
     }
 
     @Override
@@ -241,7 +305,7 @@ searchViewer.setIconified(false);
 
     @Override
     public void onUserSearchFilterClick(String meal) {
-
+searchPresenter.getMealById(meal);
     }
 
     @Override
@@ -298,5 +362,20 @@ searchViewer.setIconified(false);
     @Override
     public void showErr(String errString) {
         Toast.makeText(getActivity(),errString,Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void setMealNav(Meal meal) {
+
+            Intent intent  = new Intent(this.getActivity(), MealActivity.class);
+            intent.putExtra(MainActivity.MEAL ,meal);
+            startActivity(intent);
+
+    }
+
+    public boolean isOnline() {
+        ConnectivityManager connMgr = (ConnectivityManager) getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+        return (networkInfo != null && networkInfo.isConnected());
     }
 }

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -36,11 +37,13 @@ public class CalendarFragAdapter extends RecyclerView.Adapter<CalendarFragAdapte
         ImageView plannedMealsImageView;
         TextView plannedMealsTxtView;
         CardView plannedMealsCardView;
+        ImageButton plannedMealImageButton;
         public ViewHolder(@NonNull View v) {
             super(v);
             plannedMealsImageView = v.findViewById(R.id.plannedMealsImageView);
             plannedMealsTxtView = v.findViewById(R.id.plannedMealsTxtView);
             plannedMealsCardView = v.findViewById(R.id.plannedMealsCardView);
+            plannedMealImageButton = v.findViewById(R.id.PlannedMealImageButton);
         }
 
     }
@@ -66,7 +69,12 @@ public class CalendarFragAdapter extends RecyclerView.Adapter<CalendarFragAdapte
                 calenderFragOnClick.onItemClick(values.get(position));
             }
         });
-
+        holder.plannedMealImageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                calenderFragOnClick.onRemoveClick(values.get(position));
+            }
+        });
         Glide.with(context).load(values.get(position).getStrMealThumb()).into(holder.plannedMealsImageView);
         holder.plannedMealsTxtView.setText(values.get(position).getStrMeal());
 

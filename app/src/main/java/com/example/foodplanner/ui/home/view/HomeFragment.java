@@ -78,6 +78,7 @@ public class HomeFragment extends Fragment implements HomeOnClick , HomeView{
             recyclerView.setLayoutManager(mgr);
             homePresenter = new HomePresenter(this, Repository.getInstance(MealLocalDataSourceImpl.getInstance(getActivity()), RemoteDataSource.getInstance()));
             homePresenter.getMeals();
+
         noNetworkTryAgainButton = view.findViewById(R.id.noNetworkTryAgainButton);
         noNetworkTryAgainButton.setOnClickListener(new View.OnClickListener() {
             @Override

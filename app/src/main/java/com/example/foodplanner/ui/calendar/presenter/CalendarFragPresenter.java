@@ -196,5 +196,7 @@ calendarFragView.updateSunday(meals);
         LiveData<List<PlannedMeal>> liveData =repository.getPlannedStoredMeals(day,month,year);
         liveData.observe(lifecycleOwner,observer);
     }
-
+public void removePlannedMeal (PlannedMeal plannedMeal){
+        repository.deletePlannedMeal(plannedMeal);
+}
 }

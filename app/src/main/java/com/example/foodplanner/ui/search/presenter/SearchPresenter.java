@@ -107,7 +107,11 @@ if (i.getStrArea().equalsIgnoreCase(str))
 
     @Override
     public void onMealNetworkCallBackSuccessfulResult(List<Meal> response) {
+      if (filter.equals(SearchFragment.NAME))
         searchViewer.setMeals(response);
+      else
+          searchViewer.setMealNav(response.get(0));
+
     }
 
     @Override
@@ -122,5 +126,9 @@ searchViewer.showErr(errStr);
     }
     public void filterChange(String str){
         filter = str;
+    }
+    public  void getMealById (String id)
+    {
+        repository.getMealById(this,id);
     }
 }

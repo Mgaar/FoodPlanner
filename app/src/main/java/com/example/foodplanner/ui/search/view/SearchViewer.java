@@ -15,4 +15,5 @@ public interface SearchViewer {
     void setMeals(List<Meal> meals);
     void setFilterMeals (List<Filter> meals);
     void showErr (String errString);
+    void setMealNav (Meal meal);
 }

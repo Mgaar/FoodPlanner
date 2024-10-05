@@ -1,11 +1,15 @@
 package com.example.foodplanner.ui.calendar.view;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -13,12 +17,14 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.foodplanner.MainActivity;
 import com.example.foodplanner.R;
 import com.example.foodplanner.database.MealLocalDataSourceImpl;
 import com.example.foodplanner.databinding.FragmentCalenderBinding;
 import com.example.foodplanner.model.PlannedMeal;
 import com.example.foodplanner.model.Repository;
 import com.example.foodplanner.network.RemoteDataSource;
+import com.example.foodplanner.ui.Meal.view.MealActivity;
 import com.example.foodplanner.ui.calendar.presenter.CalendarFragPresenter;
 
 import java.util.ArrayList;
@@ -56,6 +62,8 @@ public class CalendarFragment extends Fragment implements CalendarFragView, Cale
     CalendarFragAdapter fridayCalendarFragAdapter;
     CalendarFragAdapter saturdayCalendarFragAdapter;
 
+    CalendarFragPresenter calendarFragPresenter;
+    private AlertDialog.Builder builder;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentCalenderBinding.inflate(inflater, container, false);
@@ -70,18 +78,18 @@ public class CalendarFragment extends Fragment implements CalendarFragView, Cale
         calenderFragTxtView.setText("This Week");
         calenderFragForwrdImageButton = view.findViewById(R.id.calenderFragForwrdImageButton);
          calenderFragBackImageButton = view.findViewById(R.id.calenderFragBackImageButton);
-        CalendarFragPresenter calenderFragPresenter = new CalendarFragPresenter(this, Repository.getInstance(MealLocalDataSourceImpl.getInstance(getActivity()), RemoteDataSource.getInstance()));
+         calendarFragPresenter = new CalendarFragPresenter(this, Repository.getInstance(MealLocalDataSourceImpl.getInstance(getActivity()), RemoteDataSource.getInstance()));
 
          calenderFragBackImageButton.setOnClickListener(new View.OnClickListener() {
              @Override
              public void onClick(View view) {
-                 calenderFragPresenter.onBackClick();
+                 calendarFragPresenter.onBackClick();
              }
          });
          calenderFragForwrdImageButton.setOnClickListener(new View.OnClickListener() {
              @Override
              public void onClick(View view) {
-               calenderFragPresenter.onNextClick();
+               calendarFragPresenter.onNextClick();
              }
          });
         sundayMeals = new ArrayList<PlannedMeal>();
@@ -157,10 +165,12 @@ public class CalendarFragment extends Fragment implements CalendarFragView, Cale
             calendarFragSaturdayRecyclervVew.setLayoutManager(mgrSaturday);
 
 
+        builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle("Alert !");
+        builder.setCancelable(false);
 
 
-
-        calenderFragPresenter.getThisWeekPlannedMeals(this);
+        calendarFragPresenter.getThisWeekPlannedMeals(this);
     }
 
     @Override
@@ -228,6 +238,28 @@ public class CalendarFragment extends Fragment implements CalendarFragView, Cale
 
     @Override
     public void onItemClick(PlannedMeal meal) {
+        Intent intent  = new Intent(this.getActivity(), MealActivity.class);
+        intent.putExtra(MainActivity.MEAL ,meal.getMeal());
+        startActivity(intent);
+
+    }
+
+    @Override
+    public void onRemoveClick(PlannedMeal meal) {
+
+
+
+        builder.setMessage("if u proceed u will remove " + meal.getStrMeal() );
+        builder.setPositiveButton("Proceed", (DialogInterface.OnClickListener) (dialog, which) -> {
+            calendarFragPresenter.removePlannedMeal(meal);
+            Toast.makeText(getActivity(),meal.getStrMeal()+" removed ",Toast.LENGTH_SHORT).show();
+        });
+        builder.setNegativeButton("Cancel", (DialogInterface.OnClickListener) (dialog, which) -> {
+            dialog.cancel();
+        });
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+
 
     }
 }

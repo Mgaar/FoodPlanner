@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -36,7 +37,8 @@ public class FavAdapter extends RecyclerView.Adapter<FavAdapter.ViewHolder>{
 
     public class ViewHolder extends RecyclerView.ViewHolder{
         ImageView favouriteImageView;
-        Button removeButton;
+        ImageButton removeButton;
+        Button favFragAddToPlanButton;
         TextView favouriteMealtextView;
         TextView favouriteMealCategorytextView;
         CardView cardView;
@@ -46,6 +48,7 @@ public class FavAdapter extends RecyclerView.Adapter<FavAdapter.ViewHolder>{
             removeButton = v.findViewById(R.id.removeButton);
             favouriteMealtextView = v.findViewById(R.id.favouriteMealtextView);
             favouriteMealCategorytextView = v.findViewById(R.id.favouriteMealCategorytextView);
+            favFragAddToPlanButton = v.findViewById(R.id.favFragAddToPlanButton);
             cardView=v.findViewById(R.id.favCardView);
         }
 
@@ -75,6 +78,13 @@ public class FavAdapter extends RecyclerView.Adapter<FavAdapter.ViewHolder>{
                 favOnClick.onRemoveClick(values.get(position));
             }
         });
+        holder.favFragAddToPlanButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                favOnClick.onAddToPlanClick(values.get(position));
+            }
+        });
+
         Glide.with(context).load(values.get(position).getStrMealThumb()).apply(new RequestOptions().override(150,150)
                 )
                 .into(holder.favouriteImageView);

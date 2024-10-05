@@ -10,7 +10,6 @@
         android:id="@+id/listFragRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginBottom="85dp"
         android:backgroundTint="#FFFEE7"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -8,7 +8,7 @@
 
     <style name="Theme.FoodPlanner" parent="Base.Theme.FoodPlanner" />
     <style name="CalenderViewCustom" parent="Theme.AppCompat">
-        <item name="colorAccent">@color/white</item>
+        <item name="colorAccent">@color/item_background_color</item>
     </style>
 
     <style name="CalenderViewDateCustomText" parent="android:TextAppearance.DeviceDefault.Small">

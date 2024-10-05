@@ -64,6 +64,7 @@ public class PlannedMeal {
     private String strCreativeCommonsConfirmed;
     private String dateModified;
 
+
     public PlannedMeal(Meal meal, int day,int month , int year) {
         this.idMeal = meal.getIdMeal();
         this.strMeal = meal.getStrMeal();
@@ -629,4 +630,63 @@ public class PlannedMeal {
     public void setDateModified(String dateModified) {
         this.dateModified = dateModified;
     }
+    public Meal getMeal() {
+        Meal meal = new Meal();
+        meal.setIdMeal(this.idMeal);
+        meal.setStrMeal(this.strMeal);
+        meal.setStrDrinkAlternate(this.strDrinkAlternate);
+        meal.setStrCategory(this.strCategory);
+        meal.setStrArea(this.strArea);
+        meal.setStrInstructions(this.strInstructions);
+        meal.setStrMealThumb(this.strMealThumb);
+        meal.setStrTags(this.strTags);
+        meal.setStrYoutube(this.strYoutube);
+        meal.setStrIngredient1(this.strIngredient1);
+        meal.setStrIngredient2(this.strIngredient2);
+        meal.setStrIngredient3(this.strIngredient3);
+        meal.setStrIngredient4(this.strIngredient4);
+        meal.setStrIngredient5(this.strIngredient5);
+        meal.setStrIngredient6(this.strIngredient6);
+        meal.setStrIngredient7(this.strIngredient7);
+        meal.setStrIngredient8(this.strIngredient8);
+        meal.setStrIngredient9(this.strIngredient9);
+        meal.setStrIngredient10(this.strIngredient10);
+        meal.setStrIngredient11(this.strIngredient11);
+        meal.setStrIngredient12(this.strIngredient12);
+        meal.setStrIngredient13(this.strIngredient13);
+        meal.setStrIngredient14(this.strIngredient14);
+        meal.setStrIngredient15(this.strIngredient15);
+        meal.setStrIngredient16(this.strIngredient16);
+        meal.setStrIngredient17(this.strIngredient17);
+        meal.setStrIngredient18(this.strIngredient18);
+        meal.setStrIngredient19(this.strIngredient19);
+        meal.setStrIngredient20(this.strIngredient20);
+        meal.setStrMeasure1(this.strMeasure1);
+        meal.setStrMeasure2(this.strMeasure2);
+        meal.setStrMeasure3(this.strMeasure3);
+        meal.setStrMeasure4(this.strMeasure4);
+        meal.setStrMeasure5(this.strMeasure5);
+        meal.setStrMeasure6(this.strMeasure6);
+        meal.setStrMeasure7(this.strMeasure7);
+        meal.setStrMeasure8(this.strMeasure8);
+        meal.setStrMeasure9(this.strMeasure9);
+        meal.setStrMeasure10(this.strMeasure10);
+        meal.setStrMeasure11(this.strMeasure11);
+        meal.setStrMeasure12(this.strMeasure12);
+        meal.setStrMeasure13(this.strMeasure13);
+        meal.setStrMeasure14(this.strMeasure14);
+        meal.setStrMeasure15(this.strMeasure15);
+        meal.setStrMeasure16(this.strMeasure16);
+        meal.setStrMeasure17(this.strMeasure17);
+        meal.setStrMeasure18(this.strMeasure18);
+        meal.setStrMeasure19(this.strMeasure19);
+        meal.setStrMeasure20(this.strMeasure20);
+        meal.setStrSource(this.strSource);
+        meal.setStrImageSource(this.strImageSource);
+        meal.setStrCreativeCommonsConfirmed(this.strCreativeCommonsConfirmed);
+        meal.setDateModified(this.dateModified);
+
+        return meal;
+    }
+
 }

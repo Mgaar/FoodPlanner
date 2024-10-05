@@ -75,7 +75,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="50dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="40dp"
                 android:backgroundTint="@color/item_background_color"
                 android:text="@string/addtofav"
                 android:textColor="#FFFEE7"
@@ -87,7 +87,7 @@
                 android:id="@+id/mealActAddToPlanBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="40dp"
                 android:layout_marginEnd="50dp"
                 android:backgroundTint="@color/item_background_color"
                 android:text="@string/addtoplan"
@@ -100,25 +100,26 @@
                 android:id="@+id/mealActMealAreaTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
+                android:layout_marginStart="20dp"
                 android:text="TextView"
                 android:textColor="@color/item_background_color"
                 android:textColorLink="@color/white"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:textStyle="bold|italic"
-                app:layout_constraintStart_toStartOf="@+id/mealActAddToFavBtn"
-                app:layout_constraintTop_toBottomOf="@+id/mealActAddToFavBtn" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cardView2" />
 
             <TextView
                 android:id="@+id/mealActMealCategoryTxtView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
                 android:text="TextView"
                 android:textColor="@color/item_background_color"
                 android:textColorLink="@color/white"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:textStyle="bold|italic"
-                app:layout_constraintStart_toStartOf="@+id/mealActAddToPlanBtn"
+                app:layout_constraintStart_toEndOf="@+id/mealActMealAreaTextView"
                 app:layout_constraintTop_toTopOf="@+id/mealActMealAreaTextView" />
 
             <androidx.recyclerview.widget.RecyclerView
@@ -140,7 +141,7 @@
                 android:id="@+id/mealActFixedtxtView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="10dp"
                 android:background="@color/item_background_color"
                 android:text="@string/ing"
                 android:textColor="@color/white"
@@ -148,7 +149,7 @@
                 android:textStyle="bold|italic"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/mealActMealAreaTextView" />
+                app:layout_constraintTop_toBottomOf="@+id/mealActAddToPlanBtn" />
 
             <TextView
                 android:id="@+id/mealActFixedtxtView1"

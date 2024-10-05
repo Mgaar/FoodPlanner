@@ -24,6 +24,7 @@ import com.example.foodplanner.model.Meal;
 import com.example.foodplanner.model.Repository;
 import com.example.foodplanner.network.RemoteDataSource;
 import com.example.foodplanner.ui.Meal.view.MealActivity;
+import com.example.foodplanner.ui.calenderactivity.view.CalendarActivity;
 import com.example.foodplanner.ui.fav.Presenter.FavPresenter;
 
 import java.util.ArrayList;
@@ -87,6 +88,13 @@ public class FavouriteFragment extends Fragment implements FavOnClick , FavView{
 // Show the Alert Dialog box
         alertDialog.show();
 
+    }
+
+    @Override
+    public void onAddToPlanClick(Meal meal) {
+        Intent intent  = new Intent(getActivity(), CalendarActivity.class);
+        intent.putExtra(MainActivity.MEAL ,meal);
+        startActivity(intent);
     }
 
     @Override
