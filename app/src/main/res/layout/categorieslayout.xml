@@ -23,7 +23,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <!-- Background Image -->
             <ImageView
                 android:id="@+id/searchCategoryImageView"
                 android:layout_width="match_parent"
@@ -31,14 +30,12 @@
                 android:scaleType="centerCrop"
                 tools:srcCompat="@tools:sample/avatars" />
 
-            <!-- Gradient Overlay -->
             <View
                 android:id="@+id/view2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/gradient" />
 
-            <!-- Text Overlay -->
             <TextView
                 android:id="@+id/searchCategoryTxtView"
                 android:layout_width="wrap_content"

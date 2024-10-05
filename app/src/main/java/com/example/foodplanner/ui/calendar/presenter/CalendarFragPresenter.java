@@ -28,7 +28,7 @@ LifecycleOwner lifecycleOwner;
         this.calendarFragView = calendarFragView;
         calendar = Calendar.getInstance(Locale.US);
 
-        //set the first day to be today to get
+        //set the first day to be today to get start of week
         calendar.set(Calendar.DAY_OF_WEEK, calendar.getFirstDayOfWeek());
         current = calendar.getTime();
     }
@@ -52,25 +52,25 @@ for (int i =0;i<7;i++)
      year = calendarTemp.get(Calendar.YEAR);
     calendarTemp.add(Calendar.DAY_OF_MONTH,1);
     switch (i) {
-        case 0: // Sunday
+        case 0: // sundsy
             getPlannedSundayMeals(lifecycleOwner,day, month, year);
             break;
-        case 1: // Monday
+        case 1:
             getPlannedMondayMeals(lifecycleOwner,day, month, year);
             break;
-        case 2: // Tuesday
+        case 2:
             getPlannedTuesdayMeals(lifecycleOwner,day, month, year);
             break;
-        case 3: // Wednesday
+        case 3:
             getPlannedWednesdayMeals(lifecycleOwner,day, month, year);
             break;
-        case 4: // Thursday
+        case 4:
             getPlannedThursdayMeals(lifecycleOwner,day, month, year);
             break;
-        case 5: // Friday
+        case 5:
             getPlannedFridayMeals(lifecycleOwner,day, month, year);
             break;
-        case 6: // Saturday
+        case 6:
             getPlannedSaturdayMeals(lifecycleOwner,day, month, year);
             break;
         default:

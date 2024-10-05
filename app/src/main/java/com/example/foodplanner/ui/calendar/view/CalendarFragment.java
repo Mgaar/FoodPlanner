@@ -249,7 +249,7 @@ public class CalendarFragment extends Fragment implements CalendarFragView, Cale
 
 
 
-        builder.setMessage("if u proceed u will remove " + meal.getStrMeal() );
+        builder.setMessage("if You proceed You will remove " + meal.getStrMeal() );
         builder.setPositiveButton("Proceed", (DialogInterface.OnClickListener) (dialog, which) -> {
             calendarFragPresenter.removePlannedMeal(meal);
             Toast.makeText(getActivity(),meal.getStrMeal()+" removed ",Toast.LENGTH_SHORT).show();

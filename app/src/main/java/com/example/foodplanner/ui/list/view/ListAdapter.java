@@ -14,7 +14,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.foodplanner.R;
 import com.example.foodplanner.model.Filter;
-import com.example.foodplanner.ui.search.view.SearchAreaAdapter;
 
 import java.util.List;
 

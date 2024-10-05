@@ -6,7 +6,7 @@ import androidx.lifecycle.Observer;
 
 import com.example.foodplanner.model.Meal;
 import com.example.foodplanner.model.Repository;
-import com.example.foodplanner.ui.fav.view.FavOnClick;
+
 import com.example.foodplanner.ui.fav.view.FavView;
 
 import java.util.List;

@@ -66,8 +66,8 @@ private CalenderActPresenter calenderActPresenter;
 
 
         Calendar calendar = Calendar.getInstance(Locale.US);
-        year = calendar.get(Calendar.YEAR); // Get the current year
-        month = calendar.get(Calendar.MONTH); // Get the current month (0-based, January = 0)
+        year = calendar.get(Calendar.YEAR);
+        month = calendar.get(Calendar.MONTH);
         day = calendar.get(Calendar.DAY_OF_MONTH);
         Log.i(TAG, "onCreate: "+day + month + year);
         long today = calendar.getTimeInMillis();
@@ -79,8 +79,8 @@ private CalenderActPresenter calenderActPresenter;
                 Log.i(TAG, "onSelectedDayChange: "+i+i1+i2);
                 if ((i == i1) &&(0 == i2)&&(i1 == 0))
                 {
-                     year = calendar.get(Calendar.YEAR); // Get the current year
-                     month = calendar.get(Calendar.MONTH); // Get the current month (0-based, January = 0)
+                     year = calendar.get(Calendar.YEAR);
+                     month = calendar.get(Calendar.MONTH);
                      day = calendar.get(Calendar.DAY_OF_MONTH);
                     Log.i(TAG, "onSelectedDayChange: ");
                 }
@@ -108,22 +108,7 @@ private CalenderActPresenter calenderActPresenter;
     }
 
 
-    @Override
-    public void addPlannedSuccessfully() {
-        Toast.makeText(this,meal.getStrMeal()+" added sucessfully",Toast.LENGTH_SHORT);
-        finish();
-    }
 
-    @Override
-    public void addPlannedFailure(long day) {
-        Date date = new Date(day);
 
-        // Create a SimpleDateFormat instance to format the date
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy"); // Change the format as needed
 
-        // Format the date to a string
-        String formattedDate = sdf.format(date);
-        Toast.makeText(this,meal.getStrMeal()+" already added at "+ formattedDate,Toast.LENGTH_SHORT);
-        finish();
-    }
 }

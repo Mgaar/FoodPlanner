@@ -37,12 +37,10 @@ public class MealActPresenter {
         };
       ArrayList<MealIngredients>  ingredientList = new ArrayList<>();
         String url = "https://www.themealdb.com/images/ingredients/";
-        // Loop through the ingredients and measures
+
         for (int i = 0; i < ingredients.length; i++) {
             String ingredient = ingredients[i];
             String measure = measures[i];
-
-            // Check if ingredient is not empty before adding to the list
             if (ingredient != null && !ingredient.isEmpty()) {
                 ingredientList.add(new MealIngredients(ingredient, measure, url + ingredient + "-Small.png"));
             }

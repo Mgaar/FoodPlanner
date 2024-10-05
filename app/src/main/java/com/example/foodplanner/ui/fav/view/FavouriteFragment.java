@@ -74,18 +74,15 @@ public class FavouriteFragment extends Fragment implements FavOnClick , FavView{
     @Override
     public void onRemoveClick(Meal meal) {
 
-        builder.setMessage("if u proceed u will remove " + meal.getStrMeal() );
+        builder.setMessage("if You proceed You will remove " + meal.getStrMeal() );
         builder.setPositiveButton("Proceed", (DialogInterface.OnClickListener) (dialog, which) -> {
-// When the user click yes button then app will close
             favPresenter.removeMeal(meal);
             Toast.makeText(getActivity(),meal.getStrMeal()+" removed ",Toast.LENGTH_SHORT).show();
         });
         builder.setNegativeButton("Cancel", (DialogInterface.OnClickListener) (dialog, which) -> {
-            // If user click no then dialog box is canceled.
             dialog.cancel();
         });
         AlertDialog alertDialog = builder.create();
-// Show the Alert Dialog box
         alertDialog.show();
 
     }

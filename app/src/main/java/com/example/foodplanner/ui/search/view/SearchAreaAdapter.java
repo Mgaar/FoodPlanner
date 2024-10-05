@@ -14,7 +14,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.foodplanner.R;
 import com.example.foodplanner.model.Area;
-import com.example.foodplanner.model.Category;
 
 import java.util.List;
 
@@ -93,8 +92,8 @@ public class SearchAreaAdapter extends RecyclerView.Adapter<SearchAreaAdapter.Vi
                 "th", // Thai
                 "tn", // Tunisian
                 "tr", // Turkish
-                "ua",
-                "",// Ukrainian
+                "ua",// Ukrainian
+                "",
                 "vn"  // Vietnamese
         };
         String url = "https://flagcdn.com/160x120/"+countryCodes[position]+".png";

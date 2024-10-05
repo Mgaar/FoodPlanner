@@ -274,7 +274,7 @@ searchViewer.setIconified(false);
         NavController navController = NavHostFragment.findNavController(this);
         Bundle args = new Bundle();
         args.putString(this.TYPE, this.CAT);
-        args.putString(this.LIST, string);  // pass any data you need
+        args.putString(this.LIST, string);
         navController.navigate(R.id.action_searchFragment_to_listFragment, args);
     }
 
@@ -283,7 +283,7 @@ searchViewer.setIconified(false);
         NavController navController = NavHostFragment.findNavController(this);
         Bundle args = new Bundle();
         args.putString(this.TYPE, this.ING);
-        args.putString(this.LIST, string);  // pass any data you need
+        args.putString(this.LIST, string);
         navController.navigate(R.id.action_searchFragment_to_listFragment, args);
     }
 
@@ -292,7 +292,7 @@ searchViewer.setIconified(false);
         NavController navController = NavHostFragment.findNavController(this);
         Bundle args = new Bundle();
         args.putString(this.TYPE, this.AREA);
-        args.putString(this.LIST, string);  // pass any data you need
+        args.putString(this.LIST, string);
         navController.navigate(R.id.action_searchFragment_to_listFragment, args);
     }
 

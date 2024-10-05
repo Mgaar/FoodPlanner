@@ -53,8 +53,7 @@ private ListPresenter listPresenter;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        // Get a reference to the BottomNavigationView
+
 
         return inflater.inflate(R.layout.fragment_list, container, false);
     }
@@ -113,5 +112,11 @@ listAdapter.notifyDataSetChanged();
     public void onResume() {
         super.onResume();
 
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        bottomNavigationView.setVisibility(View.VISIBLE);
     }
 }

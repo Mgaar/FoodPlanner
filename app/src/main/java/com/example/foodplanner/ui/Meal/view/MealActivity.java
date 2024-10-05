@@ -72,7 +72,7 @@ public class MealActivity extends AppCompatActivity implements MealActView{
         mealActMealInstructionsTxtView.setText(meal.getStrInstructions());
         mealActMealTxtView.setText(meal.getStrMeal());
         Glide.with(this)
-                .load(meal.getStrMealThumb()) // load image from URL or path
+                .load(meal.getStrMealThumb())
                 .into(mealActImageView);
         mealActMealCategoryTxtView.setText(meal.getStrCategory());
         mealActMealAreaTextView.setText(meal.getStrArea());
